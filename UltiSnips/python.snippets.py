@@ -61,3 +61,7 @@ xrange($1)$0
 bsnip("rre", "raise RuntimeError()", r"""
 raise RuntimeError($1)$0
 """)
+
+bsnip("pst", "print stack trace", r"""
+import sys, traceback; traceback.print_stack(file=sys.stderr)
+""")
