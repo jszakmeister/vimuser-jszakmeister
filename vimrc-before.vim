@@ -5,3 +5,9 @@ let mapleader=","
 if !has("gui_running") && &t_Co == 8
     let g:EnablePowerline = 0
 endif
+
+" Neovim isn't building python bindings yet... so disable UltiSnips if python
+" isn't available.
+if !has("python") && !has("python3")
+    let g:EnableUltiSnips = 0
+endif
