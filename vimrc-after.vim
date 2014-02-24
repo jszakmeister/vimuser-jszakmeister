@@ -818,7 +818,7 @@ command! -bar PrettyXML call DoPrettyXML()
 " -------------------------------------------------------------
 " GrabGithubIssueSnippet
 " -------------------------------------------------------------
-
+if has("python")
 python << endpython
 def getIssueData(apiUrl, repo, issueNumber):
     import requests
@@ -832,12 +832,12 @@ def getIssueData(apiUrl, repo, issueNumber):
     return json.loads(r.text)
 endpython
 
-function! GrabGithubIssueSnippet(repo, issueNumber)
-    if exists('b:gh_api_url')
-        let l:gh_api_url = b:gh_api_url
-    else
-        let l:gh_api_url = 'https://api.github.com/'
-    endif
+    function! GrabGithubIssueSnippet(repo, issueNumber)
+        if exists('b:gh_api_url')
+            let l:gh_api_url = b:gh_api_url
+        else
+            let l:gh_api_url = 'https://api.github.com/'
+        endif
 
 python << endpython
 data = getIssueData(vim.eval("l:gh_api_url"),
@@ -850,17 +850,19 @@ vim.command("let l:issueUrl = '%s'" % issueUrl)
 vim.command("let l:title = '%s'" % title)
 endpython
 
-    return "#" . a:issueNumber . ": " . l:title . "\n" . "<" . l:issueUrl . ">"
-endfunction
+        return "#" . a:issueNumber . ": " . l:title . "\n" .
+                    \ "<" . l:issueUrl . ">"
+    endfunction
 
-function! GrabIssueSnippetFromCurrentRepo(issueNumber)
-    if !exists("b:gh_repo")
-        echoerr "You must define 'b:gh_repo' first!"
-    endif
-    return GrabGithubIssueSnippet(b:gh_repo, a:issueNumber)
-endfunction
-command! -nargs=1 GrabGithubIssueSnippet
-            \ :execute "normal! a" . GrabIssueSnippetFromCurrentRepo(<args>)
+    function! GrabIssueSnippetFromCurrentRepo(issueNumber)
+        if !exists("b:gh_repo")
+            echoerr "You must define 'b:gh_repo' first!"
+        endif
+        return GrabGithubIssueSnippet(b:gh_repo, a:issueNumber)
+    endfunction
+    command! -nargs=1 GrabGithubIssueSnippet
+                \ :execute "normal! a" . GrabIssueSnippetFromCurrentRepo(<args>)
+endif
 
 " -------------------------------------------------------------
 " GrabMap
@@ -885,11 +887,12 @@ command! GrabMap :call GrabMap()
 " ReadJinjaTemplate
 " -------------------------------------------------------------
 
-function! ReadJinjaTemplate(template)
-    if !filereadable(a:template)
-        echoerr "'" . a:template . "' doesn't exist or cannot be read."
-        return
-    endif
+if has("python")
+    function! ReadJinjaTemplate(template)
+        if !filereadable(a:template)
+            echoerr "'" . a:template . "' doesn't exist or cannot be read."
+            return
+        endif
 
 python << endpython
 import jinja2
@@ -909,22 +912,24 @@ lines = buf.splitlines()
 
 vim.current.buffer[:] = lines
 endpython
-endfunction
-command! -nargs=1  -complete=file
-            \ ReadJinjaTemplate :call ReadJinjaTemplate(<f-args>)
+    endfunction
+    command! -nargs=1  -complete=file
+                \ ReadJinjaTemplate :call ReadJinjaTemplate(<f-args>)
+endif
 
 " -------------------------------------------------------------
 " Edit snippets file
 " -------------------------------------------------------------
 
-function! EditSnippets()
-    if exists("b:UltiSnipsSnippetDirectories")
-        let l:snippetDirs = b:UltiSnipsSnippetDirectories
-    elseif exists("g:UltiSnipsSnippetDirectories")
-        let l:snippetDirs = g:UltiSnipsSnippetDirectories
-    else
-        let l:snippetDirs = ["UltiSnips"]
-    endif
+if has("python")
+    function! EditSnippets()
+        if exists("b:UltiSnipsSnippetDirectories")
+            let l:snippetDirs = b:UltiSnipsSnippetDirectories
+        elseif exists("g:UltiSnipsSnippetDirectories")
+            let l:snippetDirs = g:UltiSnipsSnippetDirectories
+        else
+            let l:snippetDirs = ["UltiSnips"]
+        endif
 
 python << endpython
 import os.path
@@ -987,13 +992,15 @@ else:
     vim.command("let filename = '%s'" % path.replace("'", "''"))
 endpython
 
-    if l:filename == ""
-        echoerr "Could not find a suitable location to create snippets file."
-    else
-        exec 'e ' . l:filename
-    endif
-endfunction
-command! EditSnippets :call EditSnippets()
+        if l:filename == ""
+            echoerr "Could not find a suitable location to "
+                        \ . "create snippets file."
+        else
+            exec 'e ' . l:filename
+        endif
+    endfunction
+    command! EditSnippets :call EditSnippets()
+endif
 
 " =============================================================
 " Machine Specific Settings
