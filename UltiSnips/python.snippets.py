@@ -21,22 +21,7 @@ bsnip("template_python.snippets.py", "new snippet template", r"""
 import os
 import sys
 import re
-
-def addSnipUtilDir():
-    prevPath = None
-    path = os.path.abspath(os.path.dirname(__file__))
-
-    while path != prevPath:
-        snipUtilPath = os.path.join(path, 'UltiSnips/sniputil.py')
-        if os.path.exists(snipUtilPath):
-            sys.path.insert(0, os.path.dirname(snipUtilPath))
-            break
-
-        prevPath = path
-        path = os.path.dirname(path)
-
-addSnipUtilDir()
-
+import setpypath
 
 from sniputil import put
 
