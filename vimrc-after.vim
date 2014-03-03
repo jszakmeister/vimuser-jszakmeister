@@ -2,13 +2,6 @@
 " Variables
 " =============================================================
 
-" Default font size.
-if has("gui_win32")
-    let g:FontSize = 11
-else
-    let g:FontSize = 14
-endif
-
 function! AdjustSzakDarkColors()
     " This is here to help me test out adjustments to the color scheme.
 endfunction

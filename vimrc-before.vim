@@ -11,3 +11,12 @@ endif
 if !has("python") && !has("python3")
     let g:EnableUltiSnips = 0
 endif
+
+if !exists("g:FontSize")
+    " Default font size.
+    if has("gui_win32")
+        let g:FontSize = 11
+    else
+        let g:FontSize = 14
+    endif
+endif
