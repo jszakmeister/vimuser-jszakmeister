@@ -16,6 +16,8 @@ foreach(${1:SRC} ${${2:SRCS}})
     $0
 endforeach($1)""", aliases=["fore"])
 
-bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)""")
+bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)")
 
 wsnip("var", "${...}", r"${$0}")
+
+bsnip("inc", "include()", r"include($1)")
