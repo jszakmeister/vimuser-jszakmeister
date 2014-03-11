@@ -302,6 +302,9 @@ command! -bar SetupSource call CustomSetupSource()
 function! CustomSetupC()
     call SetupC()
     Highlight nolonglines
+
+    " Cope with Doxygen style /// comments.
+    setlocal comments=s:/*,mb:\ ,e-4:*/,:///,://
 endfunction
 command! -bar SetupC call CustomSetupC()
 
