@@ -12,11 +12,49 @@ if !has("python") && !has("python3")
     let g:EnableUltiSnips = 0
 endif
 
-if !exists("g:FontSize")
-    " Default font size.
+function! DetectPlatform()
     if has("gui_win32")
+        return "win32"
+    endif
+
+    " Assume we're on a Unix box.
+    let name = substitute(system("uname"), '^\_s*\(.\{-}\)\_s*$', '\1', '')
+
+    return tolower(name)
+endfunction
+
+function DetectVmware(platform)
+    if a:platform == "linux"
+        if filereadable("/sys/class/dmi/id/sys_vendor")
+            for line in readfile("/sys/class/dmi/id/sys_vendor", '', 10)
+                if line =~ '\cvmware'
+                    return 1
+                endif
+            endfor
+        endif
+    elseif a:platform == "freebsd"
+        if executable("kldstat")
+            let output = system("kldstat")
+            if output =~ "vmxnet"
+                return 1
+            endif
+        endif
+    endif
+
+    return 0
+endfunction
+
+let g:Platform = DetectPlatform()
+let g:InVmware = DetectVmware(g:Platform)
+
+if !exists("g:FontSize")
+    let g:FontSize = 14
+
+    if g:Platform == "win32"
         let g:FontSize = 11
-    else
-        let g:FontSize = 14
+    elseif g:InVmware
+        let g:FontSize = 12
+    elseif g:Platform == "darwin"
+        let g:FontSize = 15
     endif
 endif
