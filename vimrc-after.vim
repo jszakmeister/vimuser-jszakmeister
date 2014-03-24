@@ -666,6 +666,9 @@ augroup jszakmeister_vimrc
 
     " Treat patch files as mail when preparing to send to a list.
     autocmd BufNewFile,BufRead [0-9][0-9][0-9][0-9]-*.patch set ft=mail
+
+    " Treat my .etcrc file as shell.
+    autocmd BufRead,BufNewFile .etcrc set ft=sh
 augroup END
 
 " =============================================================
