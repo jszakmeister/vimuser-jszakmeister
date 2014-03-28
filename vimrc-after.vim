@@ -167,6 +167,7 @@ function! ChangeRebaseAction(action)
 endfunction
 
 function! SetupRebaseMappings()
+    nnoremap <buffer> <Leader><Leader>e :call ChangeRebaseAction('edit')<CR>
     nnoremap <buffer> <Leader><Leader>f :call ChangeRebaseAction('fixup')<CR>
     nnoremap <buffer> <Leader><Leader>p :call ChangeRebaseAction('pick')<CR>
     nnoremap <buffer> <Leader><Leader>r :call ChangeRebaseAction('reword')<CR>
