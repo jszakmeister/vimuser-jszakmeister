@@ -506,6 +506,22 @@ function! GitLvimrc()
     call AppendSnippetDirs("snippets/git")
 endfunction
 
+function! NeovimLvimrc()
+    call Highlight('nolonglines')
+
+    if &filetype == "c"
+        setlocal sts=2 sw=2
+    elseif &filetype == "cmake"
+        setlocal sts=2 sw=2
+    elseif &filetype == "moon"
+        setlocal sts=2 sw=2
+    elseif &filetype == "sh"
+        setlocal noexpandtab sts=8 sw=8
+    elseif &filetype == "yaml"
+        setlocal sts=2 sw=2
+    endif
+endfunction
+
 " =============================================================
 " Plugin settings
 " =============================================================
