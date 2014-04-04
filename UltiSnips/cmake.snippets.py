@@ -17,6 +17,7 @@ foreach(${1:SRC} ${${2:SRCS}})
 endforeach($1)""", aliases=["fore"])
 
 bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)")
+bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)")
 
 wsnip("var", "${...}", r"${$0}")
 
