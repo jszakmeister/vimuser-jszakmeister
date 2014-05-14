@@ -840,7 +840,10 @@ command! -bar PrettyXML call DoPrettyXML()
 " GrabGithubIssueSnippet
 " -------------------------------------------------------------
 if has("python")
-python << endpython
+    " We wrap this Python block in a function to prevent parsing errors when
+    " Python is not present.
+    function! s:DefGlobalPython()
+        python << endpython
 def getIssueData(apiUrl, repo, issueNumber):
     import requests
     import json
@@ -852,6 +855,8 @@ def getIssueData(apiUrl, repo, issueNumber):
     r = requests.get('%s/repos/%s/issues/%s' % (apiUrl, repo, issueNumber))
     return json.loads(r.text)
 endpython
+    endfunction
+    call s:DefGlobalPython()
 
     function! GrabGithubIssueSnippet(repo, issueNumber)
         if exists('b:gh_api_url')
