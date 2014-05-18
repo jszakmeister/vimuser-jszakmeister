@@ -513,6 +513,8 @@ function! NeovimLvimrc()
         setlocal sts=2 sw=2
     elseif &filetype == "cmake"
         setlocal sts=2 sw=2
+    elseif &filetype == "make"
+        setlocal sts=2 sw=2
     elseif &filetype == "moon"
         setlocal sts=2 sw=2
     elseif &filetype == "sh"
