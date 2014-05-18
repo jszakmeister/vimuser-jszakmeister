@@ -22,3 +22,8 @@ bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)")
 wsnip("var", "${...}", r"${$0}")
 
 bsnip("inc", "include()", r"include($1)")
+
+bsnip("if", "if(...)", r"""
+if($1)
+    $0
+endif()""")
