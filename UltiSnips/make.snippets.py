@@ -40,3 +40,7 @@ ifeq ($($1),)
     $0
 endif
 """, aliases=["ifem"], flags="!")
+
+bsnip("info", "$(info ...)", r"""
+$(info $1)
+""", flags="!")
