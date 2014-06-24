@@ -189,6 +189,9 @@ set list
 " I dislike wrapping being on by default.
 set nowrap
 
+" Round to the nearest stop when shifting a block.
+set shiftround
+
 " When I do turn it on though, I want to see a better line break character.
 let &showbreak = '↳   '
 
