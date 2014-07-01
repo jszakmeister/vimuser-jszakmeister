@@ -93,6 +93,63 @@ Other Issues
 ------------
 """)
 
+bsnip("release", "release notes template", r"""
+${1:1.0.0} (Released ${2:`!v strftime("%Y-%m-%d")`})
+`!p snip.rv = (len(t[1]) + len(t[2]) + 12) * '='`
+
+$3
+
+
+New Features
+------------
+
+* $0
+
+
+Enhancements
+------------
+
+*
+
+
+Bug Fixes
+---------
+
+*
+""", aliases=['rel'])
+
+
+bsnip("brelease", "release notes (with breaking changes)", r"""
+${1:1.0.0} (Released ${2:`!v strftime("%Y-%m-%d")`})
+`!p snip.rv = (len(t[1]) + len(t[2]) + 12) * '='`
+
+$3
+
+
+Breaking Changes
+----------------
+
+* $0
+
+
+New Features
+------------
+
+*
+
+
+Enhancements
+------------
+
+*
+
+
+Bug Fixes
+---------
+
+*
+""", aliases=['brel'])
+
 bsnip("sh", "sh code block", r"""
 .. code-block:: sh
 
