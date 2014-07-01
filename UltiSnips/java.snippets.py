@@ -45,8 +45,11 @@ snippet pf "printf('...', ...);" w!
 System.out.printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
-""")
+snippet err "printf('...', ...);" w!
+System.err.printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
 
+""")
 
 # 'if' snippets.
 bsnip("if", "if (...) {...}", r"""
@@ -85,3 +88,11 @@ bsnip("fore", "for (each)", r"""
 for ($1 : $2) {
     $0
 }""")
+
+bsnip("template_java", "template for a new java file", r"""
+package ${1:name};
+
+${2:public} class ${3:Name} {
+    $0
+}
+""")
