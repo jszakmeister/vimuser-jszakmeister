@@ -503,6 +503,18 @@ command! -bar SetupMail call CustomSetupMail()
 " Setup routines for lvimrc files
 " =============================================================
 
+" Helper for adding tag files from my ~/.tags folder.
+function! AddTags(...)
+    let index = 1
+    while index <= a:0
+        let tagPath = expand("$HOME/.tags/") . a:{index} . ".tags"
+        if filereadable(tagPath) == 1
+            execute 'setlocal tags+=' . escape(tagPath, ' \')
+        endif
+        let index = index + 1
+    endwhile
+endfunction
+
 function! GitLvimrc()
     call SetupKernelSource()
     call Highlight('nocommas', 'nolonglines', 'notabs')
