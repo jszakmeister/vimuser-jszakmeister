@@ -1065,3 +1065,17 @@ endif
 " before the plugin loads.  It needs to come after the machine scripts, so that
 " they have an opportunity to adjust the desired font size.
 RestoreSize
+
+" If GR_NAME is set, then attempt to load that session.
+function! RestoreGrSession()
+    if $GR_NAME == ""
+        return
+    endif
+
+    let names = xolox#session#get_names()
+    if index(names, $GR_NAME) != -1
+        exec "OpenSession " . $GR_NAME
+    endif
+endfunction
+
+call RestoreGrSession()
