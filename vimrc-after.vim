@@ -639,7 +639,8 @@ endif
 
 let g:syntastic_mode_map['active_filetypes'] =
             \ g:syntastic_mode_map['active_filetypes'] +
-            \ ['html', 'less', 'sh', 'zsh', 'javascript']
+            \ ['c', 'cpp', 'go', 'haskell', 'html', 'javascript', 'less', 'rst',
+            \  'sh', 'vim', 'zsh']
 
 let g:syntastic_python_checkers = ["pyflakes"]
 
