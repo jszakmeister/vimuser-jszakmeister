@@ -267,7 +267,7 @@ endif
 " Allow Vim to go fullscreen under Mac and Linux.
 if has("gui_macvim")
     " grow to maximum horizontal width on entering fullscreen mode
-    set fuopt+=maxhorz
+    set fuoptions+=maxhorz
 
     " This needs to go in a gvimrc, otherwise the macmenu defaults
     " clobber my setting.  Not sure how I want to do this just yet.
