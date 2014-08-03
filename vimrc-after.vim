@@ -21,6 +21,9 @@ let java_highlight_all = 1
 if filereadable(expand("$HOME/.local/bin/ctags"))
     let Tlist_Ctags_Cmd = expand("$HOME/.local/bin/ctags")
     let g:tagbar_ctags_bin = Tlist_Ctags_Cmd
+elseif filereadable("/usr/local/bin/ctags")
+    let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+    let g:tagbar_ctags_bin = Tlist_Ctags_Cmd
 endif
 
 if filereadable(expand("$HOME/.local/bin/git"))
