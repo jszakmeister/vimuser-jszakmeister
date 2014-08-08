@@ -669,9 +669,23 @@ let g:tagbar_type_clojure = {
 " Autocommands
 " =============================================================
 
+" If GR_NAME is set, then attempt to load that session.
+function! RestoreGrSession()
+    if $GR_NAME == ""
+        return
+    endif
+
+    let names = xolox#session#get_names()
+    " if names != 0 && index(names, $GR_NAME) != -1
+    if index(names, $GR_NAME) != -1
+        exec "OpenSession " . $GR_NAME
+    endif
+endfunction
+
 augroup jszakmeister_vimrc
     autocmd!
     autocmd VimEnter * call UnmapUnwanted()
+    autocmd VimEnter * call RestoreGrSession()
 
     " The toggle help feature seems to reset list.  I really want it off for
     " the help buffer though.
@@ -1063,17 +1077,3 @@ endif
 " before the plugin loads.  It needs to come after the machine scripts, so that
 " they have an opportunity to adjust the desired font size.
 RestoreSize
-
-" If GR_NAME is set, then attempt to load that session.
-function! RestoreGrSession()
-    if $GR_NAME == ""
-        return
-    endif
-
-    let names = xolox#session#get_names()
-    if index(names, $GR_NAME) != -1
-        exec "OpenSession " . $GR_NAME
-    endif
-endfunction
-
-call RestoreGrSession()
