@@ -528,8 +528,10 @@ function! NeovimLvimrc()
     call Highlight('nolonglines')
 
     if &filetype == "c"
+        setlocal cinoptions+=(0
         setlocal sts=2 sw=2
     elseif &filetype == "cmake"
+        setlocal cinoptions+=(0
         setlocal sts=2 sw=2
     elseif &filetype == "make"
         setlocal sts=2 sw=2
