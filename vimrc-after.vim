@@ -4,6 +4,11 @@
 
 function! AdjustSzakDarkColors()
     " This is here to help me test out adjustments to the color scheme.
+    if exists('+colorcolumn')
+        if &t_Co > 255 || has("gui_running")
+            highlight ColorColumn ctermbg=52 guibg=#3d0000
+        endif
+    endif
 endfunction
 
 if g:colors_name == 'szakdark'
