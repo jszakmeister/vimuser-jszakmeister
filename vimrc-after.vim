@@ -19,6 +19,9 @@ endif
 " built-in classes and object methods.
 let java_highlight_all = 1
 
+" Turn off paredit for now.
+let g:paredit_mode = 0
+
 " =============================================================
 " Detect custom exectuables
 " =============================================================
@@ -429,10 +432,10 @@ function! CustomSetupClojure()
     call SetupClojure()
 
     " Add the Emacs paredit bindings for slurpage and barfage.
-    inoremap <buffer> <C-Left> <C-\><C-O>:call PareditForwardBarf()<CR>
-    inoremap <buffer> <C-Right> <C-\><C-O>:call PareditForwardSlurp()<CR>
-    inoremap <buffer> <C-M-Left> <C-\><C-O>:call PareditBackwardSlurp()<CR>
-    inoremap <buffer> <C-M-Right> <C-\><C-O>:call PareditBackwardBarf()<CR>
+    imap <buffer> <C-Left> <C-O><Plug>(sexp_emit_tail_element)
+    imap <buffer> <C-Right> <C-O><Plug>(sexp_capture_next_element)
+    imap <buffer> <C-M-Left> <C-O><Plug>(sexp_capture_prev_element)
+    imap <buffer> <C-M-Right> <C-O><Plug>(sexp_emit_head_element)
 
     " Map fireplace's Eval.  Likely to change, but let's try this for now.
     nnoremap <buffer> <Leader><Leader>e :Eval<CR>
@@ -657,6 +660,17 @@ if g:EnablePowerline
     let g:Powerline_colorscheme = 'szakdark'
 endif
 
+
+" -------------------------------------------------------------
+" sexp
+" -------------------------------------------------------------
+
+let g:sexp_mappings = {
+    \ 'sexp_emit_tail_element':         '<C-Left>',
+    \ 'sexp_capture_next_element':      '<C-Right>',
+    \ 'sexp_emit_head_element':         '<C-M-Right>',
+    \ 'sexp_capture_prev_element':      '<C-M-Left>',
+    \ }
 
 " -------------------------------------------------------------
 " Syntastic
