@@ -233,6 +233,12 @@ if !has("gui_running") && $COLORTERM == "gnome-terminal" && &t_Co <= 16
     set t_Co=256
 endif
 
+if $SHELL =~# "zsh"
+    let &shellpipe='2>&1 | tee "%s" ; exit ${pipestatus[1]}'
+elseif $SHELL =~# "bash"
+    let &shellpipe='2>&1 | tee "%s" ; exit ${PIPESTATUS[0]}'
+endif
+
 " -------------------------------------------------------------
 " GUI options
 " -------------------------------------------------------------
