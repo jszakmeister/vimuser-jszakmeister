@@ -39,7 +39,7 @@ function MakeGreen(...) "{{{1
   redraw!
 
   let error = s:GetFirstError()
-  if error != ''
+  if v:shell_error != 0 || error != ''
     call s:Bar("red", error)
   else
     call s:Bar("green","All tests passed")
@@ -73,7 +73,7 @@ function s:Bar(type, msg)
   else
     echohl GreenBar
   endif
-  echon a:msg repeat(" ", &columns - strlen(a:msg) - 1)
+  echon a:msg repeat(" ", &columns - strlen(a:msg))
   echohl None
 endfunction
 
