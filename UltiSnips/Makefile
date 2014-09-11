@@ -5,4 +5,4 @@ SNIPPETS := $(patsubst %.py,%, $(SOURCES))
 all: $(SNIPPETS)
 
 %.snippets: %.snippets.py
-	./$< > $@
+	export "PYTHONPATH=$(HOME)/.vim/pylib"; ./$< > $@
