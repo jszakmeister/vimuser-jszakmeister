@@ -750,6 +750,11 @@ augroup jszakmeister_vimrc
     autocmd BufRead,BufNewFile *.snippets.py
                 \ setlocal makeprg=make\ -s\ -C\ %:p:h
 
+    " Set makeprg for test_*.py files to use nosetests.
+    autocmd BufRead,BufNewFile test_*.py
+                \ compiler nose |
+                \ nnoremap <buffer> <Leader><Leader>t :MakeGreen<CR>
+
     " Adjustments for my color scheme.
     autocmd ColorScheme szakdark call AdjustSzakDarkColors()
 
