@@ -1,0 +1,15 @@
+:MakeGreen	makegreen.txt	/*:MakeGreen*
+g:makegreen_stay_on_file	makegreen.txt	/*g:makegreen_stay_on_file*
+hl-GreenBar	makegreen.txt	/*hl-GreenBar*
+hl-RedBar	makegreen.txt	/*hl-RedBar*
+makegreen	makegreen.txt	/*makegreen*
+makegreen-configuration	makegreen.txt	/*makegreen-configuration*
+makegreen-contributors	makegreen.txt	/*makegreen-contributors*
+makegreen-credits	makegreen.txt	/*makegreen-credits*
+makegreen-feedback	makegreen.txt	/*makegreen-feedback*
+makegreen-installation	makegreen.txt	/*makegreen-installation*
+makegreen-license	makegreen.txt	/*makegreen-license*
+makegreen-mapping	makegreen.txt	/*makegreen-mapping*
+makegreen-requirements	makegreen.txt	/*makegreen-requirements*
+makegreen-usage	makegreen.txt	/*makegreen-usage*
+makegreen.txt	makegreen.txt	/*makegreen.txt*
