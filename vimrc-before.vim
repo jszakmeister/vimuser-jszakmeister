@@ -1,6 +1,11 @@
 " On my Dvorak keyboard, I much prefer the use of , as the leader.
 let mapleader=","
 
+" Use the subtle search highlighting in my colorscheme.
+if !exists("g:szakdark_subtle_search")
+    let g:szakdark_subtle_search = 1
+endif
+
 " Don't use Powerline on 8-color terminals... it just doesn't look good.
 if !has("gui_running") && &t_Co == 8
     let g:EnablePowerline = 0
