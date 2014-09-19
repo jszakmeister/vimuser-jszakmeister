@@ -723,9 +723,7 @@ augroup jszakmeister_vimrc
                 \ setlocal makeprg=make\ -s\ -C\ %:p:h
 
     " Adjustments for my color scheme.
-    autocmd ColorScheme * if g:colors_name == 'szakdark' |
-                \ call AdjustSzakDarkColors() |
-                \ endif
+    autocmd ColorScheme szakdark call AdjustSzakDarkColors()
 
     " Add my rebase mappings when doing a `git rebase`.
     autocmd FileType gitrebase call SetupRebaseMappings()
