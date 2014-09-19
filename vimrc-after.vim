@@ -513,6 +513,20 @@ function! CustomSetupMail()
 endfunction
 command! -bar SetupMail call CustomSetupMail()
 
+function! CustomSetupPython()
+    call SetupPython()
+
+    syntax sync fromstart
+endfunction
+command! -bar SetupPython call CustomSetupPython()
+
+function! CustomSetupShell()
+    SetupSource
+
+    syntax sync fromstart
+endfunction
+command! -bar SetupShell call CustomSetupShell()
+
 " =============================================================
 " Setup routines for lvimrc files
 " =============================================================
