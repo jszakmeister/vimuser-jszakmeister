@@ -16,6 +16,9 @@ bsnip("com", "/* comment */", r"""
 /* $1 */
 """, flags="b!")
 
+bsnip("cb", "compiler barrier (gcc)", r"""
+asm volatile("": : :"memory")
+""")
 
 # Templates
 
