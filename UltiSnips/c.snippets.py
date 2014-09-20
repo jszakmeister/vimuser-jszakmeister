@@ -20,6 +20,14 @@ bsnip("cb", "compiler barrier (gcc)", r"""
 asm volatile("": : :"memory")
 """)
 
+bsnip("docstring", "docstring for func or type", r"""
+/**
+    ${1:Brief description.}
+
+    ${0:Full description.}
+*/
+""", flags="b!", aliases=["doc"])
+
 # Templates
 
 bsnip("template_c.c", ".c template", r"""

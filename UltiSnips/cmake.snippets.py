@@ -14,10 +14,18 @@ from sniputil import abbr, babbr, wabbr
 bsnip("foreach", "foreach", r"""
 foreach(${1:SRC} ${${2:SRCS}})
     $0
-endforeach($1)""", aliases=["fore"])
+endforeach()""", aliases=["fore"])
 
-bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)")
+bsnip("while", "while", r"""
+while(${1:expr})
+    $0
+endwhile()""")
+
+bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)", aliases=["info"])
 bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)")
+bsnip("set", "set(...)", r"set($0)")
+bsnip("gfc", "get_filename_component(...)",
+        r"get_filename_component(${1:VAR} ${2:FROM} ${0:PATH})")
 
 wsnip("var", "${...}", r"${$0}")
 
@@ -27,3 +35,8 @@ bsnip("if", "if(...)", r"""
 if($1)
     $0
 endif()""")
+
+bsnip("func", "function(...)", r"""
+function(${1:name and args})
+$0
+endfunction()""")
