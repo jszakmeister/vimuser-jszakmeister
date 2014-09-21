@@ -40,3 +40,9 @@ bsnip("func", "function(...)", r"""
 function(${1:name and args})
 $0
 endfunction()""")
+
+bsnip("dump-variables", "dump all variables", r"""
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()""", aliases=["dv"])
