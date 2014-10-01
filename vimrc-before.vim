@@ -63,3 +63,7 @@ if !exists("g:FontSize")
         let g:FontSize = 15
     endif
 endif
+
+if $USER =~? "szak" || $VIMUSER =~? "szak"
+    let g:startify_disable_at_vimenter = 1
+endif
