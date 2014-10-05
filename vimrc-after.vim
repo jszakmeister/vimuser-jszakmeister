@@ -713,6 +713,12 @@ endfunction
 
 augroup jszakmeister_vimrc
     autocmd!
+
+    " Don't fall back to the terminal version of vim if the GUI fails to
+    " start (usually because of an authorization problem).  Instead, exit
+    " with an error.
+    autocmd GUIFailed * cquit
+
     autocmd VimEnter * call UnmapUnwanted()
     autocmd VimEnter * call RestoreGrSession()
 
