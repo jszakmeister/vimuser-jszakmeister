@@ -451,6 +451,11 @@ function! CustomSetupCmake()
 endfunction
 command! -bar SetupCmake call CustomSetupCmake()
 
+function! CustomSetupGo()
+    setlocal tw=80
+endfunction
+command! -bar SetupGo call CustomSetupGo()
+
 function! CustomSetupHelp()
     call SetupHelp()
 
