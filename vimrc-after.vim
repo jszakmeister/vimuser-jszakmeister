@@ -448,6 +448,8 @@ function! CustomSetupCmake()
     " Line up function args, except when they start on a new line.
     setlocal cinoptions+=(0
     setlocal cinoptions+=Ws
+
+    syntax sync fromstart
 endfunction
 command! -bar SetupCmake call CustomSetupCmake()
 
