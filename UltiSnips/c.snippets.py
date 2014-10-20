@@ -28,6 +28,13 @@ bsnip("docstring", "docstring for func or type", r"""
 */
 """, flags="b!", aliases=["doc"])
 
+bsnip("ts", "typedef struct name { ... }", r"""
+typedef struct ${1:name}
+{
+    $0
+} $1;
+""")
+
 # Templates
 
 bsnip("template_c.c", ".c template", r"""
