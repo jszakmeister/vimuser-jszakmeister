@@ -718,6 +718,10 @@ function! RestoreGrSession()
     endif
 endfunction
 
+" Always turn on the sign column.  An autocommand will be used to insert this
+" into every buffer.
+sign define _hidden
+
 augroup jszakmeister_vimrc
     autocmd!
 
@@ -732,6 +736,11 @@ augroup jszakmeister_vimrc
     " The toggle help feature seems to reset list.  I really want it off for
     " the help buffer though.
     autocmd BufEnter * if &bt == "help" | setlocal nolist | endif
+
+    " Make sure the sign column is always present.
+    autocmd BufEnter *
+                \ execute 'sign place 9999999 line=1000000000 name=_hidden '
+                \ . 'buffer=' . expand('<abuf>')
 
     " Set up syntax highlighting for e-mail and mutt.
     autocmd BufRead,BufNewFile
