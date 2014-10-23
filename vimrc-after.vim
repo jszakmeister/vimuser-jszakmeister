@@ -769,6 +769,9 @@ augroup jszakmeister_vimrc
 
     " Treat my .etcrc file as shell.
     autocmd BufRead,BufNewFile .etcrc set ft=sh
+
+    " Treat .syntastic_c_config as vim.
+    autocmd BufRead,BufNewFile .syntastic_c_config set ft=vim
 augroup END
 
 " =============================================================
