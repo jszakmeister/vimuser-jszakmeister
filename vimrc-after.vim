@@ -731,7 +731,7 @@ augroup jszakmeister_vimrc
     autocmd GUIFailed * cquit
 
     autocmd VimEnter * call UnmapUnwanted()
-    autocmd VimEnter * call RestoreGrSession()
+    autocmd VimEnter * nested call RestoreGrSession()
 
     " The toggle help feature seems to reset list.  I really want it off for
     " the help buffer though.
