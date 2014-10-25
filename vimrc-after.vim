@@ -711,10 +711,10 @@ function! RestoreGrSession()
         return
     endif
 
-    let names = xolox#session#get_names()
-    " if names != 0 && index(names, $GR_NAME) != -1
+    let names = xolox#session#get_names(0)
+
     if index(names, $GR_NAME) != -1
-        exec "OpenSession " . $GR_NAME
+        call xolox#session#open_cmd($GR_NAME, '', 'OpenSession')
     endif
 endfunction
 
