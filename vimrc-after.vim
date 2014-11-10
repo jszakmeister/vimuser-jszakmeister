@@ -848,9 +848,9 @@ function! RestoreSize()
     if has("gui_running")
         SetFont
 
-        " Set the width to accommodate a full 80 column view + tagbar + some
-        " change.
-        set columns=132
+        " Set the width to accommodate a full 80 column view + signs + tagbar +
+        " some change.
+        set columns=134
         set lines=50
     endif
 endfunction
