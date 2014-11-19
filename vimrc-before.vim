@@ -28,7 +28,7 @@ function! DetectPlatform()
     return tolower(name)
 endfunction
 
-function DetectVmware(platform)
+function! DetectVmware(platform)
     if a:platform == "linux"
         if filereadable("/sys/class/dmi/id/sys_vendor")
             for line in readfile("/sys/class/dmi/id/sys_vendor", '', 10)
