@@ -162,24 +162,6 @@ endfunction
 noremap <expr> <Home> SmartHome()
 inoremap <expr> <Home> SmartHome()
 
-function! ChangeRebaseAction(action)
-    let ptn = '^\(pick\|reword\|edit\|squash\|fixup\|exec\|p\|r\|e\|s\|f\|x\)\s'
-    let line = getline(".")
-    let result = matchstr(line, ptn)
-    if result != ""
-        execute "normal! ^cw" . a:action
-        execute "normal! ^"
-    endif
-endfunction
-
-function! SetupRebaseMappings()
-    nnoremap <buffer> <Leader><Leader>e :call ChangeRebaseAction('edit')<CR>
-    nnoremap <buffer> <Leader><Leader>f :call ChangeRebaseAction('fixup')<CR>
-    nnoremap <buffer> <Leader><Leader>p :call ChangeRebaseAction('pick')<CR>
-    nnoremap <buffer> <Leader><Leader>r :call ChangeRebaseAction('reword')<CR>
-    nnoremap <buffer> <Leader><Leader>s :call ChangeRebaseAction('squash')<CR>
-endfunction
-
 " =============================================================
 " Options
 " =============================================================
@@ -229,12 +211,6 @@ if !has("gui_running") && $COLORTERM == "gnome-terminal" && &t_Co <= 16
         let $TERM = "xterm-256color"
     endif
     set t_Co=256
-endif
-
-if $SHELL =~# "zsh"
-    let &shellpipe='2>&1 | tee "%s" ; exit ${pipestatus[1]}'
-elseif $SHELL =~# "bash"
-    let &shellpipe='2>&1 | tee "%s" ; exit ${PIPESTATUS[0]}'
 endif
 
 " -------------------------------------------------------------
@@ -446,8 +422,6 @@ function! CustomSetupCmake()
     " Line up function args, except when they start on a new line.
     setlocal cinoptions+=(0
     setlocal cinoptions+=Ws
-
-    syntax sync fromstart
 endfunction
 command! -bar SetupCmake call CustomSetupCmake()
 
@@ -484,69 +458,9 @@ function! CustomSetupMarkdownSyntax()
 endfunction
 command! -bar SetupMarkdownSyntax call CustomSetupMarkdownSyntax()
 
-function! CustomSetupMail()
-    call SetupMail()
-
-    " Highlight diffs.  Most of this was taken from notmuch's vim integration,
-    " but I turned off spelling in the highlighted lines.
-    syn match diffRemoved "^-.*" contains=@NoSpell
-    syn match diffAdded "^+.*" contains=@NoSpell
-
-    syn match diffSeparator "^---$"
-    syn match diffSubname " @@..*"ms=s+3 contained
-    syn match diffLine "^@.*" contains=diffSubname,@NoSpell
-
-    syn match diffFile "^diff .*" contains=@NoSpell
-    syn match diffNewFile "^+++ .*" contains=@NoSpell
-    syn match diffOldFile "^--- .*" contains=@NoSpell
-
-    hi def link diffOldFile diffFile
-    hi def link diffNewFile diffFile
-
-    hi def link diffFile Type
-    hi def link diffRemoved Special
-    hi def link diffAdded Identifier
-    hi def link diffLine Statement
-    hi def link diffSubname PreProc
-
-    syntax match gitDiffStatLine /^ .\{-}\zs[+-]\+$/ contains=gitDiffStatAdd,gitDiffStatDelete
-    syntax match gitDiffStatAdd /+/ contained
-    syntax match gitDiffStatDelete /-/ contained
-
-    hi def link gitDiffStatAdd diffAdded
-    hi def link gitDiffStatDelete diffRemoved
-endfunction
-command! -bar SetupMail call CustomSetupMail()
-
-function! CustomSetupPython()
-    call SetupPython()
-
-    syntax sync fromstart
-endfunction
-command! -bar SetupPython call CustomSetupPython()
-
-function! CustomSetupShell()
-    SetupSource
-
-    syntax sync fromstart
-endfunction
-command! -bar SetupShell call CustomSetupShell()
-
 " =============================================================
 " Setup routines for lvimrc files
 " =============================================================
-
-" Helper for adding tag files from my ~/.tags folder.
-function! AddTags(...)
-    let index = 1
-    while index <= a:0
-        let tagPath = expand("$HOME/.tags/") . a:{index} . ".tags"
-        if filereadable(tagPath) == 1
-            execute 'setlocal tags+=' . escape(tagPath, ' \')
-        endif
-        let index = index + 1
-    endwhile
-endfunction
 
 function! GitLvimrc()
     call SetupKernelSource()
@@ -589,9 +503,6 @@ endfunction
 " -------------------------------------------------------------
 
 nnoremap <SNR>CtrlP.....<C-s>     :<C-U>CtrlPRTS<CR>
-
-" Reuse the current window when opening new files.
-let g:ctrlp_open_new_file = 'r'
 
 " -------------------------------------------------------------
 " Grep
@@ -675,6 +586,7 @@ let g:syntastic_mode_map['active_filetypes'] =
             \ ['c', 'cpp', 'go', 'haskell', 'html', 'javascript', 'less', 'rst',
             \  'sh', 'vim', 'zsh']
 
+" let g:syntastic_debug = 31
 let g:syntastic_python_checkers = ["pyflakes"]
 
 " -------------------------------------------------------------
@@ -755,24 +667,14 @@ augroup jszakmeister_vimrc
     " Use slightly different settings for Ant's build.xml files.
     autocmd BufRead,BufNewFile build.xml SetupAnt
 
-    " Set makeprg for *.snippet.py files.
-    autocmd BufRead,BufNewFile *.snippets.py
-                \ setlocal makeprg=make\ -s\ -C\ %:p:h
-
     " Adjustments for my color scheme.
     autocmd ColorScheme szakdark call AdjustSzakDarkColors()
-
-    " Add my rebase mappings when doing a `git rebase`.
-    autocmd FileType gitrebase call SetupRebaseMappings()
 
     " Treat patch files as mail when preparing to send to a list.
     autocmd BufNewFile,BufRead [0-9][0-9][0-9][0-9]-*.patch set ft=mail
 
     " Treat my .etcrc file as shell.
     autocmd BufRead,BufNewFile .etcrc set ft=sh
-
-    " Treat .syntastic_c_config as vim.
-    autocmd BufRead,BufNewFile .syntastic_c_config set ft=vim
 augroup END
 
 " =============================================================
@@ -1028,86 +930,6 @@ endpython
     endfunction
     command! -nargs=1  -complete=file
                 \ ReadJinjaTemplate :call ReadJinjaTemplate(<f-args>)
-endif
-
-" -------------------------------------------------------------
-" Edit snippets file
-" -------------------------------------------------------------
-
-if has("python")
-    function! EditSnippets()
-        if exists("b:UltiSnipsSnippetDirectories")
-            let l:snippetDirs = b:UltiSnipsSnippetDirectories
-        elseif exists("g:UltiSnipsSnippetDirectories")
-            let l:snippetDirs = g:UltiSnipsSnippetDirectories
-        else
-            let l:snippetDirs = ["UltiSnips"]
-        endif
-
-python << endpython
-import os.path
-
-primary_filetype = vim.eval("&ft")
-filename = primary_filetype + '.snippets'
-pyfilename = filename + '.py'
-
-rtp = [os.path.realpath(os.path.expanduser(p))
-        for p in vim.eval("&rtp").split(",")]
-
-# Process them in reverse, because the UltiSnips uses the last one first.
-snippetDirs = vim.eval("l:snippetDirs")
-
-def searchForFile(filename):
-    editPath = None
-    for snippetDir in snippetDirs:
-        if editPath is not None:
-            break
-
-        for p in rtp:
-            if '/bundle/' in p or '/pre-bundle/' in p:
-                continue
-
-            fullPath = os.path.join(p, snippetDir, filename)
-            if os.path.exists(fullPath):
-                editPath = fullPath
-                break
-    return editPath
-
-path = searchForFile(pyfilename)
-if path is None:
-    # Hunt down a good location to put the snippets file.
-    for p in rtp:
-        if path is not None:
-            break
-
-        if '/bundle/' in p or '/pre-bundle/' in p:
-            continue
-
-        for snippetDir in snippetDirs:
-            fullPath = os.path.join(p, snippetDir)
-            if os.path.exists(fullPath):
-                path = fullPath
-                break
-
-        if path:
-            path = os.path.join(path, pyfilename)
-
-if path is None:
-    # Something is very wrong here.  We should at least have an
-    # UltiSnips at the root of the VIMFILES area.
-    vim.command("let filename = ''")
-else:
-    vim.command("let filename = '%s'" % path.replace("'", "''"))
-endpython
-
-        if l:filename == ""
-            echoerr "Could not find a suitable location to "
-                        \ . "create snippets file."
-        else
-            exec 'e ' . l:filename
-        endif
-    endfunction
-    command! EditSnippets :call EditSnippets()
 endif
 
 " =============================================================
