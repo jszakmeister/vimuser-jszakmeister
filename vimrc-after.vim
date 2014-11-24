@@ -120,9 +120,7 @@ command! -range CopyAsBoxQuote <line1>,<line2>call CopyAsBoxQuote()
 vnoremap <Leader><Leader>cb :CopyAsBoxQuote<CR>
 
 function! UnmapUnwanted()
-    " Unmap one of AlignMap's mappings... I don't use it, and it delays the above
-    " mapping.
-    unmap <leader>w=
+    " Here to help remove unwanted mappings set up by plugins.
 endfunction
 
 " Allow . to work over visual ranges.
