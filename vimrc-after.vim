@@ -437,6 +437,13 @@ function! CustomSetupHelp()
 endfunction
 command! -bar SetupHelp call CustomSetupHelp()
 
+function! CustomSetupMail()
+    call SetupMail()
+
+    vnoremap <buffer> <Leader><Leader>s c[snip]<ESC><Down><Home>
+endfunction
+command! -bar SetupMail call CustomSetupMail()
+
 function! CustomSetupMarkdownSyntax()
     call SetupMarkdownSyntax()
 
