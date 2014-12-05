@@ -548,7 +548,7 @@ let s:project_whitelist = [
             \ 'git',
             \ 'llvm',
             \ ]
-let g:localvimrc_whitelist = resolve(expand('$HOME/projects/')) . '\(' .
+let g:localvimrc_whitelist = resolve(expand('$HOME/projects')) . '/\(' .
             \ join(s:project_whitelist, '\|') . '\)/.*'
 
 " Turn off the sandbox, otherwise I can't turn off some highlighting features.
