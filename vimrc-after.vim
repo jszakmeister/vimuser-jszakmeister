@@ -682,6 +682,13 @@ augroup jszakmeister_vimrc
 
     " Treat my .etcrc file as shell.
     autocmd BufRead,BufNewFile .etcrc set ft=sh
+
+    if $TMPDIR != ""
+        let s:gmail_path = $TMPDIR . "chrome_*mail.google.com*.txt"
+
+        " For use with edit-server and using Vim to edit emails in GMail.
+        exec "autocmd BufRead,BufNewFile " . s:gmail_path . " set ft=mail"
+    endif
 augroup END
 
 " =============================================================
