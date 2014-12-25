@@ -7,4 +7,5 @@ endif
 augroup szak_filetypedetect
     au!
     au BufNewFile,BufRead gitconfig setfiletype gitconfig
+    au BufNewFile,BufRead *.gradle setfiletype groovy
 augroup END
