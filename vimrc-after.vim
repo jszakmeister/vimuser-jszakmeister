@@ -430,6 +430,11 @@ function! CustomSetupGo()
 endfunction
 command! -bar SetupGo call CustomSetupGo()
 
+function! CustomSetupGroovy()
+    SetupSource
+endfunction
+command! -bar SetupGroovy call CustomSetupGroovy()
+
 function! CustomSetupHelp()
     call SetupHelp()
 
