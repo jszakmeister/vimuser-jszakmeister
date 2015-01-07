@@ -647,6 +647,20 @@ endfunction
 " into every buffer.
 sign define _hidden
 
+" Help set up a filetype for the edit-in-emacs plugin for chrome.
+function! SetupEditServerFileType(domain, type)
+    if $TMPDIR == ""
+        return
+    endif
+
+    let name = "chrome_*" . a:domain . "*.txt"
+
+    let editserver_path = $TMPDIR . name
+
+    " For use with edit-server and using Vim to edit emails in GMail.
+    exec "autocmd BufRead,BufNewFile " . editserver_path . " set ft=" . a:type
+endfunction
+
 augroup jszakmeister_vimrc
     autocmd!
 
@@ -688,12 +702,8 @@ augroup jszakmeister_vimrc
     " Treat my .etcrc file as shell.
     autocmd BufRead,BufNewFile .etcrc set ft=sh
 
-    if $TMPDIR != ""
-        let s:gmail_path = $TMPDIR . "chrome_*mail.google.com*.txt"
-
-        " For use with edit-server and using Vim to edit emails in GMail.
-        exec "autocmd BufRead,BufNewFile " . s:gmail_path . " set ft=mail"
-    endif
+    call SetupEditServerFileType("mail.google.com", "mail")
+    call SetupEditServerFileType("stackoverflow.com", "markdown")
 augroup END
 
 " =============================================================
