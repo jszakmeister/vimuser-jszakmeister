@@ -491,7 +491,7 @@ function! NeovimLvimrc()
         setlocal sts=2 sw=2
     elseif &filetype == "make"
         setlocal sts=2 sw=2
-    elseif &filetype == "moon"
+    elseif &filetype == "moon" || &filetype == "lua"
         setlocal sts=2 sw=2
     elseif &filetype == "sh"
         setlocal noexpandtab sts=8 sw=8
