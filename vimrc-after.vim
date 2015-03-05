@@ -572,7 +572,7 @@ let g:localvimrc_persistent = 2
 " Powerline
 " -------------------------------------------------------------
 
-if g:EnablePowerline
+if exists("g:EnablePowerline") && g:EnablePowerline
     " Add back in a few segments...
     call Pl#Theme#InsertSegment('mode_indicator', 'after', 'paste_indicator')
     call Pl#Theme#InsertSegment('filetype', 'before', 'scrollpercent')
