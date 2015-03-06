@@ -6,6 +6,17 @@ if !exists("g:szakdark_subtle_search")
     let g:szakdark_subtle_search = 1
 endif
 
+" For some reason, gnome-terminal says xterm-color even though it supports
+" xterm-256color.
+if !has("gui_running") && $COLORTERM == "gnome-terminal" && &t_Co <= 16
+    if $TERM == "xterm"
+        " Override the default xterm setting of Gnome Terminal so that
+        " Powerline works.
+        let $TERM = "xterm-256color"
+    endif
+    set t_Co=256
+endif
+
 " Don't use Powerline on 8-color terminals... it just doesn't look good.
 if !has("gui_running") && &t_Co == 8
     let g:EnablePowerline = 0

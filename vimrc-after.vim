@@ -202,17 +202,6 @@ set splitright
 set scrolloff=4
 set sidescrolloff=5
 
-" For some reason, gnome-terminal says xterm-color even though it supports
-" xterm-256color.
-if !has("gui_running") && $COLORTERM == "gnome-terminal" && &t_Co <= 16
-    if $TERM == "xterm"
-        " Override the default xterm setting of Gnome Terminal so that
-        " Powerline works.
-        let $TERM = "xterm-256color"
-    endif
-    set t_Co=256
-endif
-
 " -------------------------------------------------------------
 " GUI options
 " -------------------------------------------------------------
