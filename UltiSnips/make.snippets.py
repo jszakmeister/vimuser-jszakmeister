@@ -15,32 +15,32 @@ bsnip("ifeq", "ifeq (...) / endif", r"""
 ifeq ($1,$2)
     $0
 endif
-""", flags="!")
+""")
 
 bsnip("ifneq", "ifneq (...) / endif", r"""
 ifneq ($1,$2)
     $0
 endif
-""", flags="!")
+""")
 
 bsnip("ifdef", "ifdef var / endif", r"""
 ifdef $1
     $0
 endif
-""", flags="!")
+""")
 
 bsnip("ifndef", "ifndef var / endif", r"""
 ifndef $1
     $0
 endif
-""", flags="!")
+""")
 
 bsnip("ifempty", "ifeq ($(VAR),) / endif", r"""
 ifeq ($($1),)
     $0
 endif
-""", aliases=["ifem"], flags="!")
+""", aliases=["ifem"])
 
 bsnip("info", "$(info ...)", r"""
 $(info $1)
-""", flags="!")
+""")

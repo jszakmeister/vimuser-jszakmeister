@@ -23,7 +23,7 @@ bsnip("docstring", "docstring for func or type", r"""
  *
  *  ${0:Full description.}
  */
-""", flags="b!", aliases=["doc", "/**"])
+""", flags="b", aliases=["doc", "/**"])
 
 # Javadoc.
 wabbr("@param",     "@param ${1:inParam}  ${0:@todo Description of $1.}",
@@ -34,18 +34,18 @@ wabbr("bug",   "/** @bug ${1:Description of BUG.} */")
 
 bsnip("pl", "System.out.println()", r"""
 System.out.println($1);
-""", flags="b!")
+""", flags="b")
 
 put(r"""
-snippet printf "printf('...', ...);" w!
+snippet printf "printf('...', ...);" w
 System.out.printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
-snippet pf "printf('...', ...);" w!
+snippet pf "printf('...', ...);" w
 System.out.printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
-snippet err "printf('...', ...);" w!
+snippet err "printf('...', ...);" w
 System.err.printf("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 

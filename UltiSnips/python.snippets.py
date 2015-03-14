@@ -29,7 +29,7 @@ from sniputil import snip, bsnip, wsnip
 from sniputil import abbr, babbr, wabbr
 
 $0
-""", flags="!")
+""")
 
 
 bsnip("screrr", "ScriptError", r"""

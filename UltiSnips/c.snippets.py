@@ -14,7 +14,7 @@ from sniputil import abbr, babbr, wabbr
 
 bsnip("com", "/* comment */", r"""
 /* $1 */
-""", flags="b!")
+""", flags="b")
 
 bsnip("cb", "compiler barrier (gcc)", r"""
 asm volatile("": : :"memory")
@@ -26,7 +26,7 @@ bsnip("docstring", "docstring for func or type", r"""
 
     ${0:Full description.}
 */
-""", flags="b!", aliases=["doc"])
+""", flags="b", aliases=["doc"])
 
 bsnip("ts", "typedef struct name { ... }", r"""
 typedef struct ${1:name}
@@ -43,7 +43,7 @@ bsnip("template_c.c", ".c template", r"""
 #endif
 
 $0
-""", flags="!")
+""")
 
 bsnip("template_c.h", ".h template", r"""
 #ifndef INCLUDED_${1:`!p import re; res = re.sub('[-/]', '_', vim.eval("expand('%:t:r')")).upper()`}
@@ -60,4 +60,4 @@ $0
 #endif
 
 #endif /* INCLUDED_$1 */
-""", flags="!")
+""")
