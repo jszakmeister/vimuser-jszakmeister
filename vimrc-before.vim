@@ -63,16 +63,20 @@ endfunction
 let g:Platform = DetectPlatform()
 let g:InVmware = DetectVmware(g:Platform)
 
-if !exists("g:FontSize")
-    let g:FontSize = 14
-
-    if g:Platform == "win32"
-        let g:FontSize = 11
-    elseif g:InVmware
-        let g:FontSize = 12
-    elseif g:Platform == "darwin"
-        let g:FontSize = 15
+function! AdjustBaseFontSize(size)
+    if g:Platform != "darwin"
+        return a:size
     endif
+
+    " Mac's idea of a point on screen is not the same as everyone else's.
+    " It appears that most operating systems either expect the screen to be 96
+    " DPI, or will query the monitor.  Mac, on the other hand, assumes that the
+    " monitor is 72 DPI.
+    return ((a:size * 96) + 35) / 72
+endfunction
+
+if !exists("g:FontSize")
+    let g:FontSize = AdjustBaseFontSize(12)
 endif
 
 if has("nvim")
