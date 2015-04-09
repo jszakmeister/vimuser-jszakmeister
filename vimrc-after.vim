@@ -650,6 +650,16 @@ function! SetupEditServerFileType(domain, type)
     exec "autocmd BufRead,BufNewFile " . editserver_path . " set ft=" . a:type
 endfunction
 
+function! ReloadColorScheme()
+    redir => current_scheme
+    colorscheme
+    redir END
+
+    let current_scheme = xolox#misc#str#trim(current_scheme)
+
+    execute 'colorscheme ' . current_scheme
+endfunction
+
 augroup jszakmeister_vimrc
     autocmd!
 
@@ -660,6 +670,14 @@ augroup jszakmeister_vimrc
 
     autocmd VimEnter * call UnmapUnwanted()
     autocmd VimEnter * nested call RestoreGrSession()
+
+    if has("nvim") && $NVIM_TUI_ENABLE_TRUE_COLOR != ""
+        " Neovim has a few issues when it comes to colorschemes right now.  The
+        " main one being is that some of the terminal support bits don't come
+        " until much later, for truecolor support.  So you need to reload the
+        " colorscheme to have it take effect.
+        autocmd VimEnter * nested call ReloadColorScheme()
+    endif
 
     " The toggle help feature seems to reset list.  I really want it off for
     " the help buffer though.
