@@ -206,14 +206,6 @@ set sidescrolloff=5
 " GUI options
 " -------------------------------------------------------------
 
-" Turn off the scrollbars... I don't need them.
-if has("gui_running")
-    set guioptions-=R
-    set guioptions-=r
-    set guioptions-=L
-    set guioptions-=l
-endif
-
 if has("gui_macvim")
     set macmeta
 endif
