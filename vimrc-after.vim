@@ -20,6 +20,27 @@ endif
 let java_highlight_all = 1
 
 " =============================================================
+" Miscellaneous functions
+" =============================================================
+
+function! SearchUpTree(filename, path)
+    let prevPath = ""
+    let curPath = fnamemodify(a:path, ":p")
+    while prevPath != curPath
+        let fullPath = curPath . "/" . a:filename
+
+        if filereadable(fullPath) || isdirectory(fullPath)
+            return curPath
+        endif
+
+        let prevPath = curPath
+        let curPath = fnamemodify(curPath, ":h")
+    endwhile
+
+    return ""
+endfunction
+
+" =============================================================
 " Detect custom exectuables
 " =============================================================
 
