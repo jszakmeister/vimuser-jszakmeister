@@ -28,7 +28,10 @@ if !has("python") && !has("python3")
     let g:EnableUltiSnips = 0
 endif
 
-if !exists("g:FontSize")
+" Prefer a different default font size.
+if exists("g:AdjustedFontSize")
+    let g:FontSize = AdjustBaseFontSize(g:AdjustedFontSize)
+elseif !exists("g:FontSize")
     let g:FontSize = AdjustBaseFontSize(12)
 endif
 
