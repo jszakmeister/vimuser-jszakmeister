@@ -94,6 +94,4 @@ endif
 if $USER =~? "szak" || $VIMUSER =~? "szak"
     " Main vimrc will tack on the other default choices.
     let g:DefaultFontFamilies = ["Hack"]
-
-    let g:startify_disable_at_vimenter = 1
 endif
