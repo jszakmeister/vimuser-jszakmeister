@@ -28,53 +28,6 @@ if !has("python") && !has("python3")
     let g:EnableUltiSnips = 0
 endif
 
-function! DetectPlatform()
-    if has("gui_win32")
-        return "win32"
-    endif
-
-    " Assume we're on a Unix box.
-    let name = substitute(system("uname"), '^\_s*\(.\{-}\)\_s*$', '\1', '')
-
-    return tolower(name)
-endfunction
-
-function! DetectVmware(platform)
-    if a:platform == "linux"
-        if filereadable("/sys/class/dmi/id/sys_vendor")
-            for line in readfile("/sys/class/dmi/id/sys_vendor", '', 10)
-                if line =~ '\cvmware'
-                    return 1
-                endif
-            endfor
-        endif
-    elseif a:platform == "freebsd"
-        if executable("kldstat")
-            let output = system("kldstat")
-            if output =~ "vmxnet"
-                return 1
-            endif
-        endif
-    endif
-
-    return 0
-endfunction
-
-let g:Platform = DetectPlatform()
-let g:InVmware = DetectVmware(g:Platform)
-
-function! AdjustBaseFontSize(size)
-    if g:Platform != "darwin"
-        return a:size
-    endif
-
-    " Mac's idea of a point on screen is not the same as everyone else's.
-    " It appears that most operating systems either expect the screen to be 96
-    " DPI, or will query the monitor.  Mac, on the other hand, assumes that the
-    " monitor is 72 DPI.
-    return ((a:size * 96) + 35) / 72
-endfunction
-
 if !exists("g:FontSize")
     let g:FontSize = AdjustBaseFontSize(12)
 endif
