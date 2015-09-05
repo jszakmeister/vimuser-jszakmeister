@@ -582,6 +582,24 @@ if exists("g:EnablePowerline") && g:EnablePowerline
     endif
 
     let g:Powerline_colorscheme = 'szakdark'
+
+    " Allow using fancy symbols for Hack.  It's designed for the newer
+    " Powerline, which uses different character codes, so we have to override
+    " them here.
+    function! CustomSetFont()
+        call SetFont()
+
+        if g:FontFamily == 'Hack'
+            let g:Powerline_symbols = 'fancy'
+            let g:Powerline_symbols_override = {
+                \ 'BRANCH': [0xE0A0],
+                \ 'LINE': [0xE0A1],
+                \ 'RO': [0xE0A2],
+                \ }
+            let g:Powerline_dividers_override = [0xE0B0, 0xE0B1, 0xE0B2, 0xE0B3]
+        endif
+    endfunction
+    command! -bar SetFont call CustomSetFont()
 endif
 
 
