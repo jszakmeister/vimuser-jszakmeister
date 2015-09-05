@@ -183,6 +183,11 @@ endfunction
 noremap <expr> <Home> SmartHome()
 inoremap <expr> <Home> SmartHome()
 
+" Like * but also bring up the search results for the current buffer in a
+" QuickFix window.
+nnoremap <silent> <Leader>* :let temp_a=@a<CR>"ayiw:MatchScratchWord<CR>
+        \:let @a=temp_a<CR>:execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
 " =============================================================
 " Options
 " =============================================================
