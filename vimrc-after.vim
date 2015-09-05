@@ -534,6 +534,17 @@ let g:Gitv_OpenHorizontal = 1
 let g:Gitv_OpenPreviewOnLaunch = 1
 
 " -------------------------------------------------------------
+" Haskellmode
+" -------------------------------------------------------------
+
+" Use the default browser.
+if g:Platform == "darwin"
+    let g:haddock_browser = 'open'
+elseif has("unix")
+    let g:haddock_browser = 'xdg-open'
+endif
+
+" -------------------------------------------------------------
 " Indent Guides
 " -------------------------------------------------------------
 
