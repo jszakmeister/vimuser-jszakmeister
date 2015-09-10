@@ -612,7 +612,8 @@ if exists("g:EnablePowerline") && g:EnablePowerline
                 \ 'LINE': [0xE0A1],
                 \ 'RO': [0xE0A2],
                 \ }
-            let g:Powerline_dividers_override = [0xE0B0, 0xE0B1, 0xE0B2, 0xE0B3]
+            let g:Powerline_dividers_override = [
+                    \ [0xE0B0], [0xE0B1], [0xE0B2], [0xE0B3]]
         endif
     endfunction
     command! -bar SetFont call CustomSetFont()
