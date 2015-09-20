@@ -228,6 +228,13 @@ set splitright
 set scrolloff=4
 set sidescrolloff=5
 
+" Highlight checkmarks and x's.
+let g:HighlightRegex_checkmarks = "\u2713"
+let g:HighlightRegex_xs = "\u2718"
+
+hi Good guifg=green ctermfg=green
+hi Evil guifg=red ctermfg=red
+
 " -------------------------------------------------------------
 " GUI options
 " -------------------------------------------------------------
@@ -754,6 +761,9 @@ augroup jszakmeister_vimrc
 
     call SetupEditServerFileType("mail.google.com", "mail")
     call SetupEditServerFileType("stackoverflow.com", "markdown")
+
+    autocmd Syntax * call HighlightNamedRegex('checkmarks', 'Good', 1)
+    autocmd Syntax * call HighlightNamedRegex('xs', 'Evil', 1)
 augroup END
 
 " =============================================================
