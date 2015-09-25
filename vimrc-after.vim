@@ -188,6 +188,67 @@ inoremap <expr> <Home> SmartHome()
 nnoremap <silent> <Leader>* :let temp_a=@a<CR>"ayiw:MatchScratchWord<CR>
         \:let @a=temp_a<CR>:execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
 
+" This emulates shiftround in the sense that it will shift to the nearest
+" multiple of shiftwidth, but it shifts the whole block by the same amount.
+" Most often the code I'm pasting is formatted correctly, just on the wrong
+" tab boundary, so this gives the desired behavior.
+function! ShiftRound(right) range
+    let lines = getline(a:firstline, a:lastline)
+    let lengths = []
+    let replacement = repeat(" ", &tabstop)
+
+    let [idx, limit] = [0, len(lines)]
+    while idx < limit
+        let pos = matchend(lines[idx], '^\s*\S\@=')
+        if pos >= 0
+            let head = substitute(strpart(lines[idx], 0, pos), "\t", replacement, "g")
+            let tail = strpart(lines[idx], pos)
+            let lines[idx] = head . tail
+            call add(lengths, strlen(head))
+        endif
+        let idx += 1
+    endwhile
+
+    if a:right != 0
+        let indent = repeat(" ", &shiftwidth - (min(lengths) % &shiftwidth))
+
+        let idx = 0
+        while idx < limit
+            if lines[idx] =~ '\S'
+                let lines[idx] = indent . lines[idx]
+            endif
+            let idx += 1
+        endwhile
+    else
+        let length = min(lengths) % &shiftwidth
+        if length == 0
+            let length = &shiftwidth
+        endif
+
+        let replacement = '^' . repeat(' ', length)
+
+        let idx = 0
+        while idx < limit
+            if lines[idx] =~ '\S'
+                let lines[idx] = substitute(lines[idx], replacement, '', '')
+            endif
+            let idx += 1
+        endwhile
+    endif
+
+    let idx = 0
+    for i in range(a:firstline, a:lastline)
+        call setline(i, lines[idx])
+        let idx += 1
+    endfor
+
+    execute '' . a:firstline . ',' . a:lastline . 'retab!'
+endfunction
+command! -range ShiftRight <line1>,<line2>call ShiftRound(1)
+command! -range ShiftLeft <line1>,<line2>call ShiftRound(0)
+vnoremap > :ShiftRight<CR>gv
+vnoremap < :ShiftLeft<CR>gv
+
 " =============================================================
 " Options
 " =============================================================
@@ -203,8 +264,8 @@ set list
 " I dislike wrapping being on by default.
 set nowrap
 
-" Round to the nearest stop when shifting a block.
-set shiftround
+" Now that we have ShiftRound, let's disable vim's shiftround option.
+set noshiftround
 
 " When I do turn it on though, I want to see a better line break character.
 let &showbreak = '↳   '
