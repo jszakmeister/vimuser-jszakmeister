@@ -54,3 +54,7 @@ import sys, traceback; traceback.print_stack(file=sys.stderr)
 bsnip("nose", "from nose.tools import *", r"""
 from nose.tools import *
 """)
+
+bsnip("gc", "gc debug", r"""
+import gc; gc.set_debug(gc.DEBUG_LEAK)
+""")
