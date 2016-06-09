@@ -80,3 +80,7 @@ wsnip("fn", "footnote", r"""
 bsnip("fne", "footnote entry", r"""
 [^${1:id}]: ${0:text}
 """)
+
+wsnip("cb", "checkbox", r"""
+[ ] $0
+""")
