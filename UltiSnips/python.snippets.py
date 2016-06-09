@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # vim:set fileencoding=utf8:
 
-import os
-import sys
-import re
 import setpypath
 
 from sniputil import put
