@@ -249,6 +249,19 @@ command! -range ShiftLeft <line1>,<line2>call ShiftRound(0)
 vnoremap > :ShiftRight<CR>gv
 vnoremap < :ShiftLeft<CR>gv
 
+" An easy way to split a line before the textwidth while in insert mode.
+function! SplitBeforeTextWidth()
+    let pos = col(".")
+
+    while &tw > 0 && pos >= &tw
+        normal B
+        let pos = col('.')
+    endwhile
+
+    return StripWhiteLeftOfCursor()
+endfunction
+inoremap <C-CR> <C-r>=SplitBeforeTextWidth()<CR><CR><C-O>$
+
 " =============================================================
 " Options
 " =============================================================
