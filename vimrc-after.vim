@@ -262,6 +262,27 @@ function! SplitBeforeTextWidth()
 endfunction
 inoremap <C-CR> <C-r>=SplitBeforeTextWidth()<CR><CR><C-O>$
 
+" Taken from Tim Pope's unimpaired.  I didn't want everything, but this seems
+" handy.  [<Space> to insert a line above the cursor, and ]<Space> to insert a
+" line below it.
+function! s:BlankUp(count) abort
+  put!=repeat(nr2char(10), a:count)
+  ']+1
+  silent! call repeat#set("\<Plug>unimpairedBlankUp", a:count)
+endfunction
+
+function! s:BlankDown(count) abort
+  put =repeat(nr2char(10), a:count)
+  '[-1
+  silent! call repeat#set("\<Plug>unimpairedBlankDown", a:count)
+endfunction
+
+nnoremap <silent> <Plug>szakBlankUp   :<C-U>call <SID>BlankUp(v:count1)<CR>
+nnoremap <silent> <Plug>szakBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
+
+nmap [<Space> <Plug>szakBlankUp
+nmap ]<Space> <Plug>szakBlankDown
+
 " =============================================================
 " Options
 " =============================================================
