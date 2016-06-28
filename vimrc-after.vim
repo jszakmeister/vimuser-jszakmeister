@@ -325,7 +325,7 @@ set sidescrolloff=5
 
 " Allow printing with UTF-8 characters.
 set printencoding=utf-8
-set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h11
+set printfont=DejaVu\ Sans\ Mono\ for\ Powerline:h10
 
 " Highlight checkmarks and x's.
 let g:HighlightRegex_checkmarks = "\u2713"
