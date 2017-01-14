@@ -287,6 +287,11 @@ nmap ]<Space> <Plug>szakBlankDown
 " Options
 " =============================================================
 
+" Disable unnamedplus when running over ssh.
+if !empty($SSH_CONNECTION)
+    set clipboard-=unnamedplus
+endif
+
 " Turn on list, and setup the listchars.
 set listchars=tab:▸\ ,trail:·,extends:>,precedes:<,nbsp:·
 if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
