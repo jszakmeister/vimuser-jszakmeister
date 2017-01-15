@@ -81,3 +81,5 @@ bsnip("fne", "footnote entry", r"""
 wsnip("cb", "checkbox", r"""
 [ ] $0
 """)
+
+wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")

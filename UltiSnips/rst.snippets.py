@@ -217,3 +217,5 @@ wsnip("res", "[RESOLVED]", r"""
 wsnip("start", "started <date>", r"""
 \`\`[started ${1:`!v strftime("%Y-%m-%d")`}]\`\` $0
 """)
+
+wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")
