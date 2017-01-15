@@ -17,6 +17,8 @@ if !has("gui_running") && $COLORTERM == "gnome-terminal" && &t_Co <= 16
     set t_Co=256
 endif
 
+let g:EnableAirline = 1
+
 " Don't use Powerline on 8-color terminals... it just doesn't look good.
 if !has("gui_running") && &t_Co == 8
     let g:EnablePowerline = 0
