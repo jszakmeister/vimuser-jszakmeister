@@ -17,3 +17,16 @@ $0
 wsnip("code", "code", r"""
 <code>$1</code>$0
 """)
+
+bsnip("template_html", "skeleton html doc", r"""
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>${1:Title}</title>
+	</head>
+	<body>
+		$0
+	</body>
+</html>
+""")
