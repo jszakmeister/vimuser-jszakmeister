@@ -737,12 +737,13 @@ endif
 
 let g:syntastic_mode_map['active_filetypes'] =
             \ g:syntastic_mode_map['active_filetypes'] +
-            \ ['c', 'cpp', 'go', 'haskell', 'html', 'javascript', 'less', 'rst',
-            \  'sh', 'vim', 'zsh']
+            \ ['c', 'cpp', 'go', 'haskell', 'html', 'java', 'javascript',
+            \  'less', 'rst', 'sh', 'vim', 'zsh']
 
 " let g:syntastic_debug = 31
 let g:syntastic_python_checkers = ["pyflakes"]
 let g:syntastic_auto_loc_list = 0
+let g:syntastic_java_checkers = ['javac']
 
 " -------------------------------------------------------------
 " Tagbar
