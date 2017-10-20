@@ -952,6 +952,12 @@ function! RestoreSize()
 endfunction
 command! -bar RestoreSize call RestoreSize()
 
+function! FixSmartQuotes() range
+    silent! execute a:firstline . "," . a:lastline . "s/’/'/g"
+    silent! execute a:firstline . "," . a:lastline . 's/[“”]/"/g'
+endfunction
+command! -range=% -bar FixSmartQuotes <line1>,<line2>call FixSmartQuotes()
+
 " -------------------------------------------------------------
 " Toggling diffs for printing.
 " -------------------------------------------------------------
