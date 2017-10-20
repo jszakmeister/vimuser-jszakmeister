@@ -55,3 +55,5 @@ from nose.tools import *
 bsnip("gc", "gc debug", r"""
 import gc; gc.set_debug(gc.DEBUG_LEAK)
 """)
+
+wsnip("fr", "from", "from ")

@@ -18,6 +18,8 @@ wsnip("code", "code", r"""
 <code>$1</code>$0
 """)
 
+wsnip("dd", "dd", "<dd>$0</dd>")
+
 bsnip("template_html", "skeleton html doc", r"""
 <!DOCTYPE html>
 <html>

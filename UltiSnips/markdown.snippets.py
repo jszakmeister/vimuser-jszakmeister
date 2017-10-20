@@ -83,7 +83,9 @@ wsnip("cb", "checkbox", r"""
 """)
 
 wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")
-wsnip("datetime", "today's date", r"""`!v strftime("%Y-%m-%d %H:%M:%S -0500")`$0""")
+
+wsnip("datetime", "today's date",
+      r"""`!v strftime("%Y-%m-%d %H:%M:%S %z")`$0""")
 
 
 bsnip("post", "post header", r"""
