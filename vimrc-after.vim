@@ -617,6 +617,36 @@ endfunction
 " =============================================================
 
 " -------------------------------------------------------------
+" Ale
+" -------------------------------------------------------------
+let g:ale_python_flake8_executable = 'python3'
+let g:ale_python_flake8_options = '-m flake8'
+
+function! BufferParseShebang()
+    let l:line = getline(1)
+    if line =~# '^#!'
+        let l:line = substitute(line, '\v^#!\s*(\S+/env(\s+-\S+)*\s+)?', '', '')
+        let l:exe = matchstr(line, '\m^\S*\ze')
+        let l:args = split(matchstr(line, '\m^\S*\zs.*'))
+        return { 'exe': l:exe, 'args': l:args }
+    endif
+    return { 'exe': '', 'args': [] }
+endfunction
+
+function! AlePythonVersionDetect()
+    let l:shebang_exe = BufferParseShebang()['exe']
+    if l:shebang_exe =~# '\m\<python[0-9]'
+        let b:ale_python_flake8_executable = l:shebang_exe
+        let b:ale_python_flake8_options = '-m flake8'
+    endif
+endfunction
+
+augroup ale_python_detect
+    autocmd!
+    autocmd filetype python call AlePythonVersionDetect()
+augroup END
+
+" -------------------------------------------------------------
 " BufExplorer
 " -------------------------------------------------------------
 
