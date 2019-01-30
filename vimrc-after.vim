@@ -312,8 +312,11 @@ let &showbreak = '↳   '
 " Ignore some Clojure/Java-related files.
 set wildignore+=target,asset-cache,out
 
+" Ignore some NodeJS-related artifacts.
+set wildignore+=node_modules,*-lock.json
+
 " I regularly create tmp folders that I don't want searched.
-set wildignore+=tmp,.lein-*,*.egg-info,.*.swo
+set wildignore+=tmp,.lein-*,*.egg-info,.*.swo,dist
 
 " Set colorcolumn, if available.
 if exists('+colorcolumn')
