@@ -646,7 +646,7 @@ endfunction
 
 augroup ale_python_detect
     autocmd!
-    autocmd filetype python call AlePythonVersionDetect()
+    autocmd FileType python call AlePythonVersionDetect()
 augroup END
 
 " -------------------------------------------------------------
