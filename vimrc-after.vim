@@ -40,6 +40,20 @@ function! SearchUpTree(filename, path)
     return ""
 endfunction
 
+function! GoSectionLines(direction)
+    " Searches for two or more blank lines, which is used as a
+    " section boundary.
+    let s = '^\n\{2,}\zs\s*\S\|\%^\n*\zs\s*\S'
+    let prev_search = @/
+    call search(s, a:direction ? 'W' : 'bW')
+    let @/ = prev_search
+endfunction
+
+function! MapSectionLines()
+    nnoremap <buffer> [[ :call GoSectionLines(0)<CR>
+    nnoremap <buffer> ]] :call GoSectionLines(1)<CR>
+endfunction
+
 " =============================================================
 " Detect custom exectuables
 " =============================================================
@@ -402,6 +416,7 @@ endif
 function! CustomSetupSource()
     call SetupSource()
     Highlight nolonglines
+    call MapSectionLines()
 endfunction
 command! -bar SetupSource call CustomSetupSource()
 
