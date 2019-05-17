@@ -409,6 +409,13 @@ endif
 " Setup routines
 " =============================================================
 
+" Override SetupText to get my section navigation mappings.
+function! CustomSetupText()
+    call SetupText()
+    call MapSectionLines()
+endfunction
+command! -bar SetupText call CustomSetupText()
+
 " Override SetupSource's enabling of longline handling.  It messes
 " up syntax-coloring, and it's often not under my control when contributing
 " to other project.  Also, it is acceptable in some projects, like Git, to
