@@ -579,6 +579,11 @@ function! CustomSetupHelp()
 endfunction
 command! -bar SetupHelp call CustomSetupHelp()
 
+function! CustomSetupMeson()
+    SetupSource
+endfunction
+command! -bar SetupMeson call CustomSetupMeson()
+
 function! CustomSetupMail()
     call SetupMail()
 
