@@ -19,7 +19,8 @@ while(${1:expr})
 endwhile()""")
 
 bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)", aliases=["info"])
-bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)")
+bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)",
+      aliases=["err"])
 bsnip("set", "set(...)", r"set($0)")
 
 bsnip("gfc", "get_filename_component(...)", r"""
@@ -39,6 +40,11 @@ bsnip("func", "function(...)", r"""
 function(${1:name and args})
 $0
 endfunction()""")
+
+bsnip("macro", "macro(...)", r"""
+macro(${1:name and args})
+$0
+endmacro()""")
 
 bsnip("dump-variables", "dump all variables", r"""
 get_cmake_property(_variableNames VARIABLES)
