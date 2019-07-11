@@ -32,6 +32,19 @@ typedef struct ${1:name}
 } $1;
 """)
 
+bsnip("vmain", "main(void)", r"""
+/** @brief Main program entry point.
+    @retval 0
+        Success.
+*/
+int
+main(void)
+{
+    $0
+    return 0;
+}
+""")
+
 # Templates
 
 bsnip("template_c.c", ".c template", r"""
