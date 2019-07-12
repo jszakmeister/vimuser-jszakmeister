@@ -323,6 +323,9 @@ set noshiftround
 " When I do turn it on though, I want to see a better line break character.
 let &showbreak = '↳   '
 
+" Ignore some C/build-related files.
+set wildignore+=*.d,*.Td
+
 " Ignore some Clojure/Java-related files.
 set wildignore+=target,asset-cache,out
 
