@@ -25,6 +25,10 @@ bsnip("docstring", "docstring for func or type", r"""
 */
 """, flags="b", aliases=["doc"])
 
+bsnip("ig", "(void) ...;", r"""
+(void) $1;$0
+""")
+
 bsnip("ts", "typedef struct name { ... }", r"""
 typedef struct ${1:name}
 {
@@ -44,6 +48,18 @@ main(void)
     return 0;
 }
 """)
+
+
+# Attributes
+
+wsnip("depr", "__attribute__ ((deprecated))", r"""
+__attribute__ ((deprecated))$0
+""")
+
+wsnip("unused", "__attribute__ ((unused))", r"""
+__attribute__ ((unused))$0
+""")
+
 
 # Templates
 
