@@ -602,6 +602,8 @@ function! CustomSetupMarkdownSyntax()
         let synLang = lang
         if lang == "c"
             let synLang = "cpp"
+        elseif lang == "ini"
+            let synLang = "dosini"
         endif
 
         let synGroup = "markdownTracEmbeddedHighlight" . synLang
