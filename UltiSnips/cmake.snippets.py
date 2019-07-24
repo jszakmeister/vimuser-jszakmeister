@@ -61,5 +61,36 @@ set_directory_properties(PROPERTIES
        ${1:ADDITIONAL_MAKE_CLEAN_FILES} ${2:value})
 """)
 
+bsnip("acc", "add_custom_command()", r"""
+add_custom_command(
+    OUTPUT_FILE ${1:output_file}
+    COMMAND ${3:command}
+    DEPENDS ${2:input_file})
+""")
+
+bsnip("cmr", "cmake_minimum_required()", r"""
+cmake_minimum_required(VERSION ${1:3.13})$0
+""")
+
+bsnip("proj", "project()", r"""
+project(${1:name} ${2:C CXX})$0
+""")
+
+bsnip("sub", "add_subdirectory()", r"""
+add_subdirectory($1)$0
+""")
+
+bsnip("exe", "add_executable()", r"""
+add_executable(${0:name and sources})
+""")
+
 wsnip("cmd", "COMMAND", r"COMMAND $0")
 wsnip("wd", "WORKING_DIRECTORY", r"WORKING_DIRECTORY $0")
+
+bsnip("template_cmake.txt", "template for new CMake file", r"""
+cmake_minimum_requirement(VERSION ${1:3.13})
+
+project(${2:name} ${3:C CXX})
+
+$0
+""")
