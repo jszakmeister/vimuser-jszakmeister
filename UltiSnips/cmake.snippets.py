@@ -88,7 +88,7 @@ wsnip("cmd", "COMMAND", r"COMMAND $0")
 wsnip("wd", "WORKING_DIRECTORY", r"WORKING_DIRECTORY $0")
 
 bsnip("template_cmake.txt", "template for new CMake file", r"""
-cmake_minimum_requirement(VERSION ${1:3.13})
+cmake_minimum_required(VERSION ${1:3.13})
 
 project(${2:name} ${3:C CXX})
 
