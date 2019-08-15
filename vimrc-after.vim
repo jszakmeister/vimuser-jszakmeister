@@ -317,6 +317,9 @@ set list
 " I dislike wrapping being on by default.
 set nowrap
 
+" Remove hyphen from breakat.  I often don't want lines broken there.
+let &breakat = substitute(&breakat, "-", "", "")
+
 " Now that we have ShiftRound, let's disable vim's shiftround option.
 set noshiftround
 
