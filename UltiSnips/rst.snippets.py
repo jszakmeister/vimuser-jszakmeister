@@ -147,62 +147,6 @@ Bug Fixes
 *
 """, aliases=['brel'])
 
-bsnip("sh", "sh code block", r"""
-.. code-block:: sh
-
-    $0
-""")
-
-bsnip("text", "text code block", r"""
-.. code-block:: text
-
-    $0
-""")
-
-bsnip("math", "math block", r"""
-.. math::
-
-    $0
-""")
-
-bsnip("foot", "footnote description", r"""
-.. [${1:label}] $0
-""")
-
-bsnip("img", "image", r"""
-.. image:: ${1:path.*}
-
-$0
-""")
-
-bsnip("cimg", "centered image", r"""
-.. image:: ${1:path.*}
-    :align: center
-
-$0
-""")
-
-# Markup
-
-wsnip("lit", "literal (code) markup", r"""
-\`\`${1:`!p betterVisual(snip)`}\`\`$0
-""")
-
-wsnip("m", "inline math", r"""
-:math:\`$1\`$0
-""")
-
-wsnip("sup", "superscript", r"""
-:sup:\`$1\`$0
-""")
-
-wsnip("link", "link markup", r"""
-\`${1:text} <${2:`!p betterVisual(snip)`}>\`_$0
-""")
-
-wsnip("title", "title reference", r"""
-:title:\`$1\`$0
-""")
 
 # Handy helpers (for me).
 
@@ -217,5 +161,3 @@ wsnip("res", "[RESOLVED]", r"""
 wsnip("start", "started <date>", r"""
 \`\`[started ${1:`!v strftime("%Y-%m-%d")`}]\`\` $0
 """)
-
-wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")
