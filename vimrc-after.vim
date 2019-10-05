@@ -430,6 +430,11 @@ function! CustomSetupSource()
     call SetupSource()
     Highlight nolonglines
     call MapSectionLines()
+
+    " Highlight my todo markers.
+    syn region Todo matchgroup=TodoMarker start="###" end="$" keepend
+    hi TodoMarker guifg=white
+    hi Todo guifg=#d78700
 endfunction
 command! -bar SetupSource call CustomSetupSource()
 
