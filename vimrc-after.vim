@@ -336,7 +336,7 @@ set wildignore+=target,asset-cache,out
 set wildignore+=node_modules,*-lock.json
 
 " I regularly create tmp folders that I don't want searched.
-set wildignore+=tmp,.lein-*,*.egg-info,.*.swo,dist
+set wildignore+=tmp,*-tmp,.lein-*,*.egg-info,.*.swo,dist
 
 " Set colorcolumn, if available.
 if exists('+colorcolumn')
