@@ -41,3 +41,11 @@ endif
 bsnip("info", "$(info ...)", r"""
 $(info $1)
 """)
+
+bsnip("warn", "$(warning ...)", r"""
+$(warning $1)
+""")
+
+bsnip("err", "$(error ...)", r"""
+$(error $1)
+""")
