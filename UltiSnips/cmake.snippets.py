@@ -19,6 +19,7 @@ while(${1:expr})
 endwhile()""")
 
 bsnip("mss", "message(STATUS ...)", r"message(STATUS $0)", aliases=["info"])
+bsnip("msw", "message(WARNING ...)", r"message(WARNING $0)", aliases=["warn"])
 bsnip("msf", "message(FATAL_ERROR ...)", r"message(FATAL_ERROR $0)",
       aliases=["err"])
 bsnip("set", "set(...)", r"set($0)")
