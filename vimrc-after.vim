@@ -621,6 +621,11 @@ function! CustomSetupMarkdownSyntax()
                     \ 'start="^\s*{{{\n\s*::' . lang .
                     \ '\>.*$" end="^\s*}}}\ze\s*$" ' .
                     \ 'keepend contains=@markdownHighlight' . synLang
+        exe 'syn region ' . synGroup . ' ' .
+                    \ 'matchgroup=markdownCodeDelimiter ' .
+                    \ 'start="^\s*{% \s*highlight \s*' . lang .
+                    \ ' \s*%}\s*$" end="^\s*{% endhighlight %}\ze\s*$" ' .
+                    \ 'keepend contains=@markdownHighlight' . synLang
     endfor
 endfunction
 command! -bar SetupMarkdownSyntax call CustomSetupMarkdownSyntax()
