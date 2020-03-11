@@ -98,3 +98,9 @@ tags:
 ---
 $0
 """)
+
+bsnip("rrbook", "recommended reading book", r"""
+  - <a href="${3:url}" rel="nofollow">**${1:title}**</a>
+    *by ${2:author}* &ndash; ${0}
+
+""")
