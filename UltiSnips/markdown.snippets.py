@@ -82,6 +82,10 @@ wsnip("cb", "checkbox", r"""
 [ ] $0
 """)
 
+wsnip("nd", "ndash", r"""
+&ndash; $0
+""")
+
 wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")
 
 wsnip("datetime", "today's date",
