@@ -297,6 +297,11 @@ nnoremap <silent> <Plug>szakBlankDown :<C-U>call <SID>BlankDown(v:count1)<CR>
 nmap [<Space> <Plug>szakBlankUp
 nmap ]<Space> <Plug>szakBlankDown
 
+" Disable F1 as the help key.  In normal editing, I have a tendency to slip and
+" hit F1, making the help appear when I don't want it--especially on my laptop.
+" Let's just disable it as there are several other ways to get it.
+nnoremap <F1> <nop>
+
 " =============================================================
 " Options
 " =============================================================
