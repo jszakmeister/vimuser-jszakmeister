@@ -301,6 +301,8 @@ nmap ]<Space> <Plug>szakBlankDown
 " hit F1, making the help appear when I don't want it--especially on my laptop.
 " Let's just disable it as there are several other ways to get it.
 nnoremap <F1> <nop>
+xnoremap <F1> <nop>
+inoremap <F1> <nop>
 
 " =============================================================
 " Options
