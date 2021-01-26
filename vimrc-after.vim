@@ -946,8 +946,9 @@ augroup jszakmeister_vimrc
     " Treat patch files as mail when preparing to send to a list.
     autocmd BufNewFile,BufRead [0-9][0-9][0-9][0-9]-*.patch set ft=mail
 
-    " Treat my .etcrc file as shell.
+    " Treat my .etcrc and .etcenv file as shell.
     autocmd BufRead,BufNewFile .etcrc set ft=sh
+    autocmd BufRead,BufNewFile .etcenv set ft=sh
 
     call SetupEditServerFileType("mail.google.com", "mail")
     call SetupEditServerFileType("stackoverflow.com", "markdown")
