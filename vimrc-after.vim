@@ -1194,6 +1194,40 @@ function! ReformatXml(line1, line2)
 endfunction
 command! -range=% ReformatXml call ReformatXml(<line1>, <line2>)
 
+" -------------------------------------------------------------
+" ToggleHex
+" -------------------------------------------------------------
+
+function! ToggleHex()
+    " See https://vim.fandom.com/wiki/Improved_hex_editing
+    let l:modified = &mod
+    let l:oldreadonly = &readonly
+    let &readonly = 0
+    let l:oldmodifiable = &modifiable
+    let &modifiable = 1
+    if !exists("b:editHex") || !b:editHex
+        " Save old options
+        let b:oldft = &ft
+        let b:oldbin = &bin
+        setlocal binary
+        silent :e
+        let &ft = "xxd"
+        let b:editHex = 1
+        %!xxd
+    else
+        let &ft = b:oldft
+        if !b:oldbin
+            setlocal nobinary
+        endif
+        let b:editHex = 0
+        %!xxd -r
+    endif
+    let &mod = l:modified
+    let &readonly = l:oldreadonly
+    let &modifiable = l:oldmodifiable
+endfunction
+command! -bar ToggleHex call ToggleHex()
+
 " =============================================================
 " Machine Specific Settings
 " =============================================================
