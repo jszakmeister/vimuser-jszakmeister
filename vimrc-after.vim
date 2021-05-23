@@ -1228,6 +1228,10 @@ function! ToggleHex()
 endfunction
 command! -bar ToggleHex call ToggleHex()
 
+" Reverse lines in a range.
+command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
+
+
 " =============================================================
 " Machine Specific Settings
 " =============================================================
