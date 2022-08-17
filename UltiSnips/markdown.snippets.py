@@ -86,8 +86,6 @@ wsnip("nd", "ndash", r"""
 &ndash; $0
 """)
 
-wsnip("date", "today's date", r"""`!v strftime("%Y-%m-%d")`$0""")
-
 wsnip("datetime", "today's date",
       r"""`!v strftime("%Y-%m-%d %H:%M:%S %z")`$0""")
 
