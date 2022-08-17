@@ -86,6 +86,9 @@ vnoremap > >gv
 " From http://vim.wikia.com/wiki/Selecting_your_pasted_text
 nnoremap <expr> gV '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+" Remap <Space><Space> to exit bufmru mode after switching buffers.
+exec "nmap <Space><Space> " . g:bufmru_switchkey . "<Enter>"
+
 " Some reminders of the tag-related shortcuts, since I tend to check my
 " configuration first.
 " C-] - go to definition
