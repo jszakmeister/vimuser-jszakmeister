@@ -958,6 +958,10 @@ augroup jszakmeister_vimrc
 
     autocmd Syntax * call HighlightNamedRegex('checkmarks', 'Good', 1)
     autocmd Syntax * call HighlightNamedRegex('xs', 'Evil', 1)
+
+    if has("gui_macvim")
+        autocmd GUIEnter,VimEnter * set printexpr=system('echo\ '.v:fname_in.'\ >>/Users/jszakmeister/hardcopy\ &&\ pstopdf\ -o\ '.v:fname_in.'.pdf\ '.v:fname_in.'\ &&\ open\ '.v:fname_in.'.pdf')\ +\ v:shell_error
+    endif
 augroup END
 
 " =============================================================
