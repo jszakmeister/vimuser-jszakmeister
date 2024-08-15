@@ -99,7 +99,7 @@ def main():
 
     cmd.set_defaults(command=command_dummy)
 
-    args = parser.parse()
+    args = parser.parse_args()
 
     try:
         args.command(args)
