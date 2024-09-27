@@ -60,6 +60,7 @@ wsnip("fr", "from", "from ")
 
 bsnip("cli-sub", "subcommand cli template", r"""
 import argparse
+import logging
 import sys
 
 from pathlib import Path
@@ -67,7 +68,15 @@ from pathlib import Path
 from . import __version__ as VERSION
 
 
+log = logging.getLogger("")
+
+
 def add_common_options(parser):
+    parser.add_argument(
+        "--debug",
+        help="Turn on verbose logging.",
+        default=False,
+        action="store_true")
     parser.add_argument(
         "--traceback",
         default=False,
@@ -100,6 +109,10 @@ def main():
     cmd.set_defaults(command=command_dummy)
 
     args = parser.parse_args()
+
+    logging.basicConfig(stream=sys.stdout,
+                        level=logging.DEBUG if args.debug else logging.ERROR,
+                        format="%(levelname)s: %(message)s")
 
     try:
         args.command(args)
